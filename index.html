@@ -26,6 +26,7 @@
 
       body {
         overscroll-behavior: none;
+        overflow-x: hidden;
       }
 
       main> :first-child {
@@ -39,6 +40,31 @@
 
     ::-webkit-scrollbar {
       display: none;
+    }
+
+    /* Mobile responsiveness safety net */
+    html {
+      overflow-x: hidden;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* Mobile dropdown nav: guaranteed hidden on large screens even if JS state is stale */
+    @media (min-width: 1280px) {
+      #mobileNavMenu {
+        display: none !important;
+      }
+    }
+
+    @media (max-width: 480px) {
+
+      .font-display-lg.text-display-lg-mobile {
+        font-size: 28px !important;
+        line-height: 36px !important;
+      }
     }
   </style>
   <script src="https://cdn.tailwindcss.com"></script>
@@ -97,15 +123,42 @@
             data-path="about-us" href="#">About</a><a
             class="px-space-sm py-1.5 font-title-md text-[14px] text-on-surface hover:text-secondary hover:bg-surface-container-low transition-colors rounded-lg"
             data-path="contact" href="#contact-section">Contact</a></nav>
-        <div class="flex items-center gap-space-xs"><a
+        <div class="flex items-center gap-space-xs"><button aria-label="Toggle menu"
+            class="xl:hidden inline-flex items-center justify-center w-10 h-10 rounded-lg text-on-surface hover:bg-surface-container-low transition-colors"
+            id="mobileMenuBtn" onclick="toggleMobileMenu()" type="button"><span
+              class="material-symbols-outlined text-[26px]" id="mobileMenuIcon">menu</span></button><a
             class="hidden sm:inline-flex items-center gap-1 px-space-sm py-2 rounded-lg border border-outline-variant/50 text-on-surface hover:bg-surface-container text-xs font-semibold tracking-wider transition-all"
             href="tel:+923184949806"><span class="material-symbols-outlined text-[16px] text-secondary">call</span><span
               class="">Call Now</span></a><a
             class="inline-flex items-center gap-space-2xs bg-tertiary-container hover:bg-[#00381d] text-tertiary-fixed px-space-md py-2 rounded-lg font-title-md text-[14px] font-bold transition-all shadow-[0_4px_12px_rgba(0,33,17,0.25)] border border-tertiary-fixed/30 hover:scale-[1.02]"
             href="https://wa.me/923184949806" rel="noopener noreferrer" target="_blank"><span
-              class="material-symbols-outlined text-[18px] text-tertiary-fixed">chat</span><span class="">WhatsApp
+              class="material-symbols-outlined text-[18px] text-tertiary-fixed">chat</span><span class="hidden sm:inline">WhatsApp
               Us</span></a></div>
       </div>
+    </div>
+    <div class="hidden flex-col absolute top-full left-0 w-full bg-surface-container-lowest border-t border-surface-container-high shadow-lg max-h-[75vh] overflow-y-auto"
+      id="mobileNavMenu">
+      <nav class="flex flex-col p-space-md gap-1">
+        <a class="px-space-sm py-2.5 font-title-md text-[15px] text-on-surface hover:text-secondary hover:bg-surface-container-low transition-colors rounded-lg"
+          href="#" onclick="toggleMobileMenu()">Home</a>
+        <a class="px-space-sm py-2.5 font-title-md text-[15px] text-on-surface hover:text-secondary hover:bg-surface-container-low transition-colors rounded-lg"
+          href="#tours-section" onclick="toggleMobileMenu()">Tours</a>
+        <a class="px-space-sm py-2.5 font-title-md text-[15px] text-on-surface hover:text-secondary hover:bg-surface-container-low transition-colors rounded-lg"
+          href="#" onclick="toggleMobileMenu()">Umrah</a>
+        <a class="px-space-sm py-2.5 font-title-md text-[15px] text-on-surface hover:text-secondary hover:bg-surface-container-low transition-colors rounded-lg"
+          href="#" onclick="toggleMobileMenu()">Hajj</a>
+        <a class="px-space-sm py-2.5 font-title-md text-[15px] text-on-surface hover:text-secondary hover:bg-surface-container-low transition-colors rounded-lg"
+          href="#fleet-section" onclick="toggleMobileMenu()">Rent</a>
+        <a class="px-space-sm py-2.5 font-title-md text-[15px] text-on-surface hover:text-secondary hover:bg-surface-container-low transition-colors rounded-lg"
+          href="#estate-section" onclick="toggleMobileMenu()">Properties</a>
+        <a class="px-space-sm py-2.5 font-title-md text-[15px] text-on-surface hover:text-secondary hover:bg-surface-container-low transition-colors rounded-lg"
+          href="#" onclick="toggleMobileMenu()">About</a>
+        <a class="px-space-sm py-2.5 font-title-md text-[15px] text-on-surface hover:text-secondary hover:bg-surface-container-low transition-colors rounded-lg"
+          href="#contact-section" onclick="toggleMobileMenu()">Contact</a>
+        <a class="mt-1 inline-flex items-center justify-center gap-space-2xs bg-tertiary-container text-tertiary-fixed px-space-md py-2.5 rounded-lg font-title-md text-[15px] font-bold"
+          href="https://wa.me/923184949806" rel="noopener noreferrer" target="_blank"><span
+            class="material-symbols-outlined text-[18px]">chat</span>WhatsApp Us</a>
+      </nav>
     </div>
   </header>
   <main class="w-full pt-28 bg-surface">
@@ -118,12 +171,10 @@
             style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAUVrMmOKY0FKEnGZOdLKkilFrGMfn93VCqJYc8GhkYXiR3oJ067lCRefqPYhe_hJEWbD98dQZZ2PlAFl_Qyc6qINzGX2btzUp_X1hu4Mj3yelvAdMlfe55pbzrpr39z5JAvhEbi9wB7Vy7tdach_r6Um3wT4HFUdAlbAiaJQDBz2m0Tfpn5vn-5JInmSTU1__LjKv4OMwpm1dwCIYVp4XkHO73htrxGWP33LbcrQqSow4zGwK3S6e8-g')">
           </div>
         </div>
-        <!-- Architectural radial gradient -->
         <div
           class="absolute inset-0 z-0 bg-gradient-to-b from-primary-container/85 via-primary-container/95 to-primary-container pointer-events-none">
         </div>
         <div class="relative z-10 max-w-7xl mx-auto px-margin-mobile lg:px-margin-desktop">
-          <!-- Regulated Trust Badges -->
           <div class="flex flex-wrap items-center gap-space-xs mb-space-lg">
             <span
               class="inline-flex items-center gap-space-2xs px-space-sm py-1 rounded-full bg-secondary/20 text-secondary-fixed font-label-md text-label-md">
@@ -152,7 +203,6 @@
                 Solutions. Serving executive clientele, overseas families, and discerning travelers across Pakistan with
                 institutional reliability.
               </p>
-              <!-- CTAs -->
               <div class="flex flex-wrap gap-space-sm pt-space-xs">
                 <a class="inline-flex items-center justify-center gap-space-xs bg-secondary hover:bg-secondary-container text-on-secondary hover:text-on-secondary-container px-space-lg py-space-sm rounded-lg font-title-md text-title-md transition-all shadow-md"
                   href="#tours-section">
@@ -177,7 +227,6 @@
                 </a>
               </div>
             </div>
-            <!-- Metric Accent Panel -->
             <div
               class="lg:col-span-4 bg-surface-container-lowest/10 backdrop-blur-md rounded-xl p-space-lg text-surface space-y-space-md shadow-xl">
               <div class="flex items-center justify-between pb-space-sm">
@@ -209,7 +258,6 @@
               </p>
             </div>
           </div>
-          <!-- Quick Concierge Booking Bar -->
           <div
             class="mt-space-2xl bg-surface-container-lowest text-on-surface rounded-xl p-space-md lg:p-space-lg shadow-xl">
             <div class="flex flex-wrap gap-space-xs pb-space-md" id="heroBookingTabs">
@@ -229,7 +277,6 @@
                 <span class="material-symbols-outlined text-[18px]">home_work</span> Estate &amp; Properties
               </button>
             </div>
-            <!-- Tab 1: Travel -->
             <div class="grid grid-cols-1 md:grid-cols-4 gap-space-md" id="tabContentTravel">
               <div class="flex flex-col">
                 <label class="font-label-md text-label-md text-on-surface-variant mb-1">Destination / Package</label>
@@ -266,7 +313,6 @@
                 </button>
               </div>
             </div>
-            <!-- Tab 2: Car with Driver -->
             <div class="hidden grid grid-cols-1 md:grid-cols-4 gap-space-md" id="tabContentCar">
               <div class="flex flex-col">
                 <label class="font-label-md text-label-md text-on-surface-variant mb-1">Vehicle Category</label>
@@ -301,7 +347,6 @@
                 </button>
               </div>
             </div>
-            <!-- Tab 3: Estate -->
             <div class="hidden grid grid-cols-1 md:grid-cols-4 gap-space-md" id="tabContentEstate">
               <div class="flex flex-col">
                 <label class="font-label-md text-label-md text-on-surface-variant mb-1">Society / Zone</label>
@@ -345,7 +390,6 @@
           </div>
         </div>
       </section>
-      <!-- SECTION: 3 CORE BUSINESS DIVISIONS -->
       <section class="w-full py-space-3xl px-margin-mobile lg:px-margin-desktop bg-surface">
         <div class="max-w-7xl mx-auto">
           <div class="text-center max-w-3xl mx-auto mb-space-2xl space-y-space-xs">
@@ -358,7 +402,6 @@
               verified institutional execution.</p>
           </div>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter-desktop">
-            <!-- Division 1 -->
             <div
               class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
               <div>
@@ -399,7 +442,6 @@
                 </a>
               </div>
             </div>
-            <!-- Division 2 -->
             <div
               class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
               <div>
@@ -445,7 +487,6 @@
                 </a>
               </div>
             </div>
-            <!-- Division 3 -->
             <div
               class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
               <div>
@@ -489,7 +530,6 @@
           </div>
         </div>
       </section>
-      <!-- SECTION: SERVICES SPECIALIZATION MATRIX -->
       <section class="w-full py-space-3xl px-margin-mobile lg:px-margin-desktop bg-surface-container-low">
         <div class="max-w-7xl mx-auto">
           <div class="flex flex-col md:flex-row md:items-end justify-between mb-space-2xl gap-space-md">
@@ -505,7 +545,6 @@
             </div>
           </div>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter-desktop">
-            <!-- Travel Column -->
             <div class="bg-surface-container-lowest p-space-xl rounded-xl space-y-space-md shadow-sm">
               <div
                 class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center text-secondary">
@@ -533,7 +572,6 @@
                   E-Ticketing &amp; 5-Star Stays</li>
               </ul>
             </div>
-            <!-- Rent A Car Column -->
             <div class="bg-surface-container-lowest p-space-xl rounded-xl space-y-space-md shadow-sm">
               <div
                 class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center text-secondary">
@@ -567,7 +605,6 @@
                   Non-Self-Drive Policy (Safety &amp; Reliability)</li>
               </ul>
             </div>
-            <!-- Estate Column -->
             <div class="bg-surface-container-lowest p-space-xl rounded-xl space-y-space-md shadow-sm">
               <div
                 class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center text-secondary">
@@ -610,7 +647,6 @@
               <p class="font-body-md text-body-md text-on-surface-variant mt-1">Every package is backed by our vetted
                 transport fleet, curated luxury accommodations, and dedicated tour directors.</p>
             </div>
-            <!-- Tour Filter Bar -->
             <div class="flex flex-wrap gap-space-xs">
               <button
                 class="tour-filter-btn px-space-md py-space-xs rounded-lg font-title-md text-title-md bg-primary-container text-surface"
@@ -623,9 +659,7 @@
                 data-tour-filter="international" onclick="filterTours('international')">International</button>
             </div>
           </div>
-          <!-- Tour Cards Grid -->
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter-desktop" id="toursContainer">
-            <!-- Card 1 -->
             <div
               class="tour-card bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all flex flex-col justify-between"
               data-category="national">
@@ -685,7 +719,6 @@
                 </div>
               </div>
             </div>
-            <!-- Card 2 -->
             <div
               class="tour-card bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all flex flex-col justify-between"
               data-category="national">
@@ -745,7 +778,6 @@
                 </div>
               </div>
             </div>
-            <!-- Card 3 -->
             <div
               class="tour-card bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all flex flex-col justify-between"
               data-category="international">
@@ -804,7 +836,6 @@
                 </div>
               </div>
             </div>
-            <!-- Card 4 -->
             <div
               class="tour-card bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all flex flex-col justify-between"
               data-category="international">
@@ -863,7 +894,6 @@
                 </div>
               </div>
             </div>
-            <!-- Card 5 -->
             <div
               class="tour-card bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all flex flex-col justify-between"
               data-category="national">
@@ -923,7 +953,6 @@
                 </div>
               </div>
             </div>
-            <!-- Card 6 -->
             <div
               class="tour-card bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all flex flex-col justify-between"
               data-category="national">
@@ -1012,9 +1041,7 @@
               </a>
             </div>
           </div>
-          <!-- Umrah Cards Grid -->
           <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter-desktop">
-            <!-- Umrah 1: Economy -->
             <div
               class="bg-surface-container-lowest/10 backdrop-blur-md rounded-xl p-space-lg text-surface space-y-space-md flex flex-col justify-between">
               <div class="space-y-space-sm">
@@ -1055,7 +1082,6 @@
                 </a>
               </div>
             </div>
-            <!-- Umrah 2: Standard 4-Star -->
             <div
               class="bg-surface-container-lowest/10 backdrop-blur-md rounded-xl p-space-lg text-surface space-y-space-md flex flex-col justify-between">
               <div class="space-y-space-sm">
@@ -1096,7 +1122,6 @@
                 </a>
               </div>
             </div>
-            <!-- Umrah 3: 5-Star VIP Executive -->
             <div
               class="bg-surface-container-lowest/15 backdrop-blur-md rounded-xl p-space-lg text-surface space-y-space-md flex flex-col justify-between shadow-2xl">
               <div class="space-y-space-sm">
@@ -1138,7 +1163,6 @@
               </div>
             </div>
           </div>
-          <!-- Hajj Ministry Guidance Bar -->
           <div
             class="bg-surface-container-lowest/10 backdrop-blur-md rounded-xl p-space-lg flex flex-col lg:flex-row items-center justify-between gap-space-md">
             <div class="space-y-space-2xs">
@@ -1175,7 +1199,6 @@
               executive, luxury, SUV, family, and commercial vehicles — all available with verified professional
               drivers.</p>
           </div>
-          <!-- MANDATORY DRIVER POLICY BANNER -->
           <div
             class="bg-primary-container text-surface rounded-xl p-space-md lg:p-space-lg flex flex-col sm:flex-row items-center justify-between gap-space-md shadow-md">
             <div class="flex items-center gap-space-md">
@@ -1196,7 +1219,6 @@
               100% Chauffeur Dispatched
             </span>
           </div>
-          <!-- Vehicle Filter Controls -->
           <div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm space-y-space-sm">
             <div class="flex items-center justify-between flex-wrap gap-space-xs">
               <span class="font-title-md text-title-md text-on-surface">Filter Fleet by Category:</span>
@@ -1224,9 +1246,7 @@
                 data-fleet-cat="family" onclick="filterFleet('family')">Family Vans &amp; Coasters</button>
             </div>
           </div>
-          <!-- COMPLETE FLEET CARDS CONTAINER -->
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter-desktop" id="fleetGridContainer">
-            <!-- 1. Toyota Prado V8 -->
             <div
               class="fleet-card bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all flex flex-col justify-between"
               data-category="luxury">
@@ -1293,7 +1313,6 @@
                 </div>
               </div>
             </div>
-            <!-- 2. Toyota Land Cruiser TX/ZX -->
             <div
               class="fleet-card bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all flex flex-col justify-between"
               data-category="luxury">
@@ -1358,7 +1377,6 @@
                 </div>
               </div>
             </div>
-            <!-- 3. Toyota Fortuner & Hilux Revo -->
             <div
               class="fleet-card bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all flex flex-col justify-between"
               data-category="suv">
@@ -1424,7 +1442,6 @@
                 </div>
               </div>
             </div>
-            <!-- 4. Modern Crossovers: Sportage, Tucson, Haval H6, Oshan X7 -->
             <div
               class="fleet-card bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all flex flex-col justify-between"
               data-category="suv">
@@ -1490,7 +1507,6 @@
                 </div>
               </div>
             </div>
-            <!-- 5. Executive Sedans: Civic, Grande, Sonata -->
             <div
               class="fleet-card bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all flex flex-col justify-between"
               data-category="sedan">
@@ -1557,7 +1573,6 @@
                 </div>
               </div>
             </div>
-            <!-- 6. Grand Cabin & Coaster Saloon -->
             <div
               class="fleet-card bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all flex flex-col justify-between"
               data-category="family">
@@ -1624,7 +1639,6 @@
                 </div>
               </div>
             </div>
-            <!-- 7. Economy Hatchbacks: Alto, Wagon R, Cultus, Swift -->
             <div
               class="fleet-card bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all flex flex-col justify-between"
               data-category="economy">
@@ -1691,7 +1705,6 @@
               </div>
             </div>
           </div>
-          <!-- Quick Rent A Car Inquiry Form & Use Cases -->
           <div
             class="grid grid-cols-1 lg:grid-cols-12 gap-gutter-desktop mt-space-2xl bg-surface-container-low p-space-lg lg:p-space-xl rounded-xl">
             <div class="lg:col-span-5 space-y-space-md">
@@ -1811,7 +1824,6 @@
                 houses, genuine plots, and high-yield commercial plazas in Pakistan's most prestigious housing
                 societies.</p>
             </div>
-            <!-- Property Filters -->
             <div class="flex flex-wrap gap-space-xs" id="propertyFilterBar">
               <button
                 class="prop-filter-btn px-space-md py-space-xs rounded-lg font-title-md text-title-md bg-primary-container text-surface"
@@ -1827,9 +1839,7 @@
                 data-prop-filter="commercial" onclick="filterProperties('commercial')">Commercial Plazas</button>
             </div>
           </div>
-          <!-- Properties Grid -->
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter-desktop" id="propertiesContainer">
-            <!-- Prop 1: 1 Kanal House -->
             <div
               class="prop-card bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all flex flex-col justify-between"
               data-category="house">
@@ -1891,7 +1901,6 @@
                 </div>
               </div>
             </div>
-            <!-- Prop 2: 1 Kanal Plot -->
             <div
               class="prop-card bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all flex flex-col justify-between"
               data-category="plot">
@@ -1953,7 +1962,6 @@
                 </div>
               </div>
             </div>
-            <!-- Prop 3: 10 Marla House -->
             <div
               class="prop-card bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all flex flex-col justify-between"
               data-category="house">
@@ -2016,7 +2024,6 @@
                 </div>
               </div>
             </div>
-            <!-- Prop 4: Commercial Plaza -->
             <div
               class="prop-card bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all flex flex-col justify-between"
               data-category="commercial">
@@ -2078,7 +2085,6 @@
                 </div>
               </div>
             </div>
-            <!-- Prop 5: 5 Marla Plot -->
             <div
               class="prop-card bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all flex flex-col justify-between"
               data-category="plot">
@@ -2140,7 +2146,6 @@
                 </div>
               </div>
             </div>
-            <!-- Prop 6: 2 Kanal Bahria Mansion -->
             <div
               class="prop-card bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all flex flex-col justify-between"
               data-category="house">
@@ -2217,42 +2222,36 @@
               without middlemen inflation, and total accountability.</p>
           </div>
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter-desktop">
-            <!-- Pillar 1 -->
             <div class="p-space-lg bg-surface-container-low rounded-xl space-y-space-xs">
               <span class="material-symbols-outlined text-secondary text-[36px]">verified</span>
               <h4 class="font-title-lg text-title-lg text-on-surface">Govt. Licensed Tour Operator</h4>
               <p class="font-body-md text-body-md text-on-surface-variant">Accredited by the Department of Tourist
                 Services and Ministry of Religious Affairs (License No. 4982-PK) assuring legal peace of mind.</p>
             </div>
-            <!-- Pillar 2 -->
             <div class="p-space-lg bg-surface-container-low rounded-xl space-y-space-xs">
               <span class="material-symbols-outlined text-secondary text-[36px]">shield_with_heart</span>
               <h4 class="font-title-lg text-title-lg text-on-surface">Guaranteed Chauffeur Fleet</h4>
               <p class="font-body-md text-body-md text-on-surface-variant">Zero self-drive disputes. Every vehicle is
                 helmed by a thoroughly background-checked, polite, and skilled chauffeur.</p>
             </div>
-            <!-- Pillar 3 -->
             <div class="p-space-lg bg-surface-container-low rounded-xl space-y-space-xs">
               <span class="material-symbols-outlined text-secondary text-[36px]">assignment_turned_in</span>
               <h4 class="font-title-lg text-title-lg text-on-surface">Real Estate Legal Due Diligence</h4>
               <p class="font-body-md text-body-md text-on-surface-variant">Every plot, house, and commercial file
                 undergoes rigorous patwari, DHA, and authority title searches before listing.</p>
             </div>
-            <!-- Pillar 4 -->
             <div class="p-space-lg bg-surface-container-low rounded-xl space-y-space-xs">
               <span class="material-symbols-outlined text-secondary text-[36px]">payments</span>
               <h4 class="font-title-lg text-title-lg text-on-surface">Transparent Pricing in PKR</h4>
               <p class="font-body-md text-body-md text-on-surface-variant">No hidden toll surcharges or unexpected
                 driver meal levies. Upfront quotations in PKR with itemized clarity.</p>
             </div>
-            <!-- Pillar 5 -->
             <div class="p-space-lg bg-surface-container-low rounded-xl space-y-space-xs">
               <span class="material-symbols-outlined text-secondary text-[36px]">support_agent</span>
               <h4 class="font-title-lg text-title-lg text-on-surface">24/7 Dedicated Support</h4>
               <p class="font-body-md text-body-md text-on-surface-variant">Round-the-clock emergency replacement cars,
                 pilgrimage guidance officers in Saudi Arabia, and active airport dispatchers.</p>
             </div>
-            <!-- Pillar 6 -->
             <div class="p-space-lg bg-surface-container-low rounded-xl space-y-space-xs">
               <span class="material-symbols-outlined text-secondary text-[36px]">mark_chat_read</span>
               <h4 class="font-title-lg text-title-lg text-on-surface">Instant WhatsApp Protocol</h4>
@@ -2273,7 +2272,6 @@
               Overseas Pakistanis</h2>
           </div>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter-desktop">
-            <!-- Review 1 -->
             <div class="bg-surface-container-lowest p-space-xl rounded-xl space-y-space-sm shadow-sm">
               <div class="flex text-secondary gap-1">
                 <span class="material-symbols-outlined text-[18px]">star</span>
@@ -2295,7 +2293,6 @@
                 <span class="material-symbols-outlined text-secondary-fixed text-[24px]">verified</span>
               </div>
             </div>
-            <!-- Review 2 -->
             <div class="bg-surface-container-lowest p-space-xl rounded-xl space-y-space-sm shadow-sm">
               <div class="flex text-secondary gap-1">
                 <span class="material-symbols-outlined text-[18px]">star</span>
@@ -2317,7 +2314,6 @@
                 <span class="material-symbols-outlined text-secondary-fixed text-[24px]">verified</span>
               </div>
             </div>
-            <!-- Review 3 -->
             <div class="bg-surface-container-lowest p-space-xl rounded-xl space-y-space-sm shadow-sm">
               <div class="flex text-secondary gap-1">
                 <span class="material-symbols-outlined text-[18px]">star</span>
@@ -2467,7 +2463,6 @@
       <section class="w-full py-space-4xl px-margin-mobile lg:px-margin-desktop bg-surface" id="contact-section">
         <div class="max-w-7xl mx-auto">
           <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter-desktop">
-            <!-- Contact Information Column -->
             <div class="lg:col-span-5 space-y-space-lg">
               <div class="space-y-space-xs">
                 <span class="font-label-md text-label-md uppercase tracking-widest text-secondary">Immediate Concierge
@@ -2476,7 +2471,6 @@
                 <p class="font-body-md text-body-md text-on-surface-variant">Our senior divisional managers are on
                   standby to process tour itineraries, chauffeur vehicle requirements, and property inquiries.</p>
               </div>
-              <!-- Instant WhatsApp Feature Box -->
               <div class="bg-tertiary-container text-surface p-space-lg rounded-xl space-y-space-sm shadow-md">
                 <div class="flex items-center gap-space-sm">
                   <div
@@ -2520,7 +2514,6 @@
                   </div>
                 </div>
               </div>
-              <!-- Simulated Map Preview Component -->
               <div
                 class="w-full h-44 bg-surface-container rounded-xl overflow-hidden shadow-inner flex flex-col items-center justify-center text-center p-space-sm"
                 data-location="DHA Phase 5, Lahore, Pakistan"
@@ -2530,7 +2523,6 @@
                 <p class="font-label-md text-label-md text-on-surface-variant">Lahore, Punjab, Pakistan</p>
               </div>
             </div>
-            <!-- Master Inquiry Form -->
             <div class="lg:col-span-7 bg-surface-container-lowest p-space-lg lg:p-space-2xl rounded-xl shadow-lg">
               <h3 class="font-headline-md text-headline-md text-on-surface">Send Corporate Inquiry</h3>
               <p class="font-body-md text-body-md text-on-surface-variant mt-1 mb-space-lg">Fill this form to receive
@@ -2646,6 +2638,22 @@
       </div>
       <!-- CLIENT-SIDE CONTROLLERS & DATA ARCHITECTURE -->
       <script>
+        // Mobile navigation menu toggle
+        function toggleMobileMenu() {
+          const menu = document.getElementById('mobileNavMenu');
+          const icon = document.getElementById('mobileMenuIcon');
+          const isHidden = menu.classList.contains('hidden');
+          if (isHidden) {
+            menu.classList.remove('hidden');
+            menu.classList.add('flex');
+            icon.innerText = 'close';
+          } else {
+            menu.classList.add('hidden');
+            menu.classList.remove('flex');
+            icon.innerText = 'menu';
+          }
+        }
+
         // Tab controller for Hero Quick Booking
         function switchHeroBookingTab(tab) {
           const travelContent = document.getElementById('tabContentTravel');
@@ -2656,7 +2664,6 @@
           const btnCar = document.getElementById('tabBtnCar');
           const btnEstate = document.getElementById('tabBtnEstate');
 
-          // Reset tabs
           [travelContent, carContent, estateContent].forEach(c => c.classList.add('hidden'));
           [btnTravel, btnCar, btnEstate].forEach(b => {
             b.className = 'px-space-md py-space-xs rounded-lg font-title-md text-title-md bg-surface-container hover:bg-surface-container-high text-on-surface-variant flex items-center gap-space-2xs transition-all';
@@ -2674,7 +2681,6 @@
           }
         }
 
-        // Hero Quick Submissions
         function submitHeroTravel() {
           const dest = document.getElementById('heroTravelDest').value;
           const month = document.getElementById('heroTravelDate').value;
@@ -2698,7 +2704,6 @@
           window.open(`https://wa.me/923184949806?text=${encodeURIComponent(msg)}`, '_blank');
         }
 
-        // Tours Filter
         function filterTours(category) {
           document.querySelectorAll('.tour-filter-btn').forEach(btn => {
             if (btn.getAttribute('data-tour-filter') === category) {
@@ -2717,7 +2722,6 @@
           });
         }
 
-        // Fleet Filter
         function filterFleet(category) {
           document.querySelectorAll('.fleet-filter-btn').forEach(btn => {
             if (btn.getAttribute('data-fleet-cat') === category) {
@@ -2736,7 +2740,6 @@
           });
         }
 
-        // Property Filter
         function filterProperties(category) {
           document.querySelectorAll('.prop-filter-btn').forEach(btn => {
             if (btn.getAttribute('data-prop-filter') === category) {
@@ -2755,7 +2758,6 @@
           });
         }
 
-        // Gallery Filter
         function filterGallery(category) {
           document.querySelectorAll('.gal-filter-btn').forEach(btn => {
             if (btn.getAttribute('data-gal-filter') === category) {
@@ -2774,7 +2776,6 @@
           });
         }
 
-        // Modal Handlers
         function openVehicleModal(name, category, price, specs) {
           document.getElementById('modalBadge').innerText = '100% Chauffeur Driven Fleet';
           document.getElementById('modalTitle').innerText = name;
@@ -2809,7 +2810,6 @@
           document.getElementById('universalModal').classList.add('hidden');
         }
 
-        // Form Handlers
         function handleCarBookingSubmit(e) {
           e.preventDefault();
           const vehicle = document.getElementById('carFormVehicle').value;
@@ -2934,6 +2934,7 @@
       </div>
     </div>
   </footer>
+  <script src="https://cdn.zanderio.ai/widget/loader.js" data-id="wdg_yk00UMwdR9WWfjy8d2BmDwCe" defer></script>
 </body>
 
 </html>
